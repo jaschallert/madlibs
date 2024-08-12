@@ -15,11 +15,13 @@ ui <- fluidPage(
       textInput("verb", "Enter a verb:", ""),
       textInput("adjective", "Enter an adjective:", ""),
       textInput("adverb", "Enter an adverb:", ""),
-      actionButton("submit", "Create Story")
+      actionButton("submit", "Create Story"),
+      actionButton("runlog", "Generate Log")
     ),
     mainPanel(
       h3("Your Mad Libs Story:"),
-      textOutput("story")
+      textOutput("story"),
+      textOutput("log")
     )
   )
 )
@@ -30,6 +32,10 @@ server <- function(input, output) {
   })
   output$story <- renderText({
     story()
+  })
+
+  log <- eventReactive(input$runlog, {
+    "here is the log"
   })
 }
 
